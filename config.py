@@ -1,22 +1,15 @@
 # config.py
-
-# Cấu hình cho đường dẫn và tên file
+# Cấu hình chung cho file
 SERVICE_ACCOUNT_FILE = 'credentials.json'
-OUTPUT_FILENAME = 'DD UP WEB.xlsx'
 
-# Cấu hình cho Google Sheet
-GOOGLE_SHEET_NAME = 'DD UP WEB'
-WORKSHEET_NAME = 'Căn hộ cao tầng'
-
-# --- CẤU HÌNH CHO TỰ ĐỘNG HÓA WEB ---
+# --- CẤU HÌNH CHUNG CHO TỰ ĐỘNG HÓA WEB ---
 WEB_AUTOMATION_ENABLED = True
 
-LOGIN_URL = "https://admin.mayhomes.vn/web/login"
+# URL đăng nhập và URL import là cấu hình chung
+COMMON_LOGIN_URL = "https://admin.mayhomes.vn/web/login"
 IMPORT_URL = "https://admin.mayhomes.vn/web#model=product.template&action=import"
-USERNAME = "lethuhien@gmail.com"
-PASSWORD = "123456"
 
-# Locators cho automation (sử dụng CSS Selectors)
+# Locators cho automation (dùng chung cho các tác vụ)
 LOCATORS = {
     'username_field': '#login',
     'password_field': '#password',
@@ -31,7 +24,6 @@ LOCATORS = {
 }
 
 # --- CẤU HÌNH CHO TELEGRAM ---
-TELEGRAM_BOT_TOKEN = "7672970617:AAFecyaaMPSGoyLO-40_HyoAOOX-2WkKEO0" 
-TELEGRAM_CHAT_ID = "5749118184"   
-# Danh sách ID của admin có quyền sử dụng bot
+TELEGRAM_BOT_TOKEN = "7672970617:AAFecyaaMPSGoyLO-40_HyoAOOX-2WkKEO0"
+TELEGRAM_CHAT_ID = "5749118184"
 TELEGRAM_ADMIN_IDS = [5749118184]

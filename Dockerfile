@@ -13,7 +13,7 @@ RUN playwright install --with-deps
 
 # Copy file entrypoint vào và cấp quyền thực thi
 COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+RUN chmod ugo+x entrypoint.sh
 
 # Copy toàn bộ code của ứng dụng vào thư mục làm việc trong container
 COPY . .

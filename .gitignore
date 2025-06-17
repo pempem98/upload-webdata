@@ -70,5 +70,6 @@ credentials.json
 *.ini
 
 # Local output files
+workspace
 *.xlsx
 *.png

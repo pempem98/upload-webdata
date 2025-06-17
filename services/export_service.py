@@ -10,7 +10,7 @@ class ExportService:
         self._destination = destination
         self._post_action = post_action
 
-    def run(self):
+    def run(self) -> str: # Trả về đường dẫn file output
         print("\n🚀 Bắt đầu quy trình xuất dữ liệu...")
         data = self._source.read()
         processed_data = self._processor.process(data)
@@ -18,4 +18,6 @@ class ExportService:
         
         if self._post_action and output_filepath:
             self._post_action.execute(output_filepath)
+            
         print("🎉 Quy trình xuất dữ liệu hoàn tất.")
+        return output_filepath
