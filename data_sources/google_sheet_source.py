@@ -1,6 +1,6 @@
 import gspread
 import pandas as pd
-from interfaces.data_source import IDataSource
+from interfaces import IDataSource
 
 class GSpreadClient:
     _instance = None

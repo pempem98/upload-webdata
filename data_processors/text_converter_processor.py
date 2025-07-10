@@ -1,5 +1,5 @@
 import pandas as pd
-from interfaces.data_processor import IDataProcessor
+from interfaces import IDataProcessor
 
 class TextConverterProcessor(IDataProcessor):
     def process(self, data: pd.DataFrame) -> pd.DataFrame:

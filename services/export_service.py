@@ -1,7 +1,4 @@
-from interfaces.data_source import IDataSource
-from interfaces.data_processor import IDataProcessor
-from interfaces.data_destination import IDataDestination
-from interfaces.post_export_action import IPostExportAction
+from interfaces import IDataSource, IDataProcessor, IDataDestination, IPostExportAction
 
 class ExportService:
     def __init__(self, source: IDataSource, processor: IDataProcessor, destination: IDataDestination, post_action: IPostExportAction = None):

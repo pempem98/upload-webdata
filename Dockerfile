@@ -1,22 +1,34 @@
-# Stage 1: Chọn một base image Python gọn nhẹ
+# Dockerfile
+# Sử dụng Python 3.11 base image
 FROM python:3.11-slim
 
-# Thiết lập thư mục làm việc bên trong container
+# Thiết lập thư mục làm việc trong container
 WORKDIR /app
 
-# Tối ưu hóa cache: Copy và cài đặt requirements trước
+# Cài đặt tiện ích dos2unix để xử lý ký tự xuống dòng (CRLF -> LF)
+# và các thư viện cần thiết cho Playwright
+RUN apt-get update && \
+    apt-get install -y dos2unix libnss3 libnspr4 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libatspi2.0-0 libxcomposite1 libxrandr2 libgbm1 libxkbcommon0 libpango-1.0-0 libcairo2 libasound2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Sao chép file requirements.txt trước để tận dụng Docker cache
 COPY requirements.txt .
+
+# Cài đặt các thư viện Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Chạy lệnh cài đặt trình duyệt cho Playwright bên trong container
-RUN playwright install --with-deps
+# Cài đặt trình duyệt cho Playwright
+RUN playwright install --with-deps chromium
 
-# Copy file entrypoint vào và cấp quyền thực thi
-COPY entrypoint.sh .
-RUN chmod ugo+x entrypoint.sh
-
-# Copy toàn bộ code của ứng dụng vào thư mục làm việc trong container
+# Sao chép toàn bộ mã nguồn của ứng dụng vào container
 COPY . .
 
-# Chỉ định entrypoint để chạy khi container khởi động
+# Chuyển đổi định dạng file entrypoint.sh sang Unix (LF)
+RUN dos2unix /app/entrypoint.sh
+
+# Cấp quyền thực thi cho entrypoint script
+RUN chmod +x /app/entrypoint.sh
+
+# Thiết lập entrypoint để chạy ứng dụng
 ENTRYPOINT ["/app/entrypoint.sh"]

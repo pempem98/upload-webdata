@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: inventory_importer_app
+    restart: unless-stopped
+    volumes:
+      - ./workspace:/app/workspace
+      - ./app.db:/app/app.db
+      - ./credentials.json:/app/credentials.json
+    env_file:
+      - .env

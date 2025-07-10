@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 from datetime import datetime
-from interfaces.data_destination import IDataDestination
+from interfaces import IDataDestination
 
 class ExcelDestination(IDataDestination):
     def __init__(self, base_path: str, telegram_id: int, spreadsheet_name: str):

@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright, expect
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
-from interfaces.post_export_action import IPostExportAction
+from interfaces import IPostExportAction
 import os
 
 class PlaywrightAction(IPostExportAction):
@@ -48,7 +48,7 @@ class PlaywrightAction(IPostExportAction):
                 # import time
                 # time.sleep(10)
                 loading_spin = page.locator(self.locators['loading_spin'])
-                expect(loading_spin).not_to_be_visible(timeout=600000)
+                expect(loading_spin).not_to_be_visible(timeout=30*60*1000)
 
                 # Kiểm tra thông báo kết quả
                 alert_boxes = page.locator(self.locators['import_alert']).all()
